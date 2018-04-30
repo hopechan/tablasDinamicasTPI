@@ -9,7 +9,7 @@ services:
         ports:
         - '3306:3306'
         volumes:
-        - /home/mariadblMantenimientoVol:/var/lib/mysql
+        - ./mariadblMantenimientoVol:/var/lib/mysql
     paymantenimiento: 
         image: 'microserver'
         build: ./Payaramicro/.   
@@ -17,6 +17,16 @@ services:
         depends_on:
         - marmantenimiento
         ports:
-        - "8080:8080"
+        - '8080:8080'
+    
+    frontend:
+        image: 'frontend'
+        build: ./FrontEnd/.
+        container_name: 'frontmantenimiento'
+        depends_on: 
+        - paymantenimiento
+        ports: 
+        - '80:80'
+       
        
     
