@@ -27,6 +27,7 @@ services:
         - paymantenimiento
         ports: 
         - '80:80'
+          
        
        
     
