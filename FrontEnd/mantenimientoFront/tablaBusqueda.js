@@ -74,8 +74,8 @@ class TablaBusqueda extends HTMLElement {
 
     //Recibe un json con la busqueda deseada
     let crearTablaEntidad = function (busquedas, paginacion) {
-      let maxPage = Math.ceil(busquedas.length / paginacion); //AA
-      let actualPageNumber = 1; //AA
+      let maxPage = Math.ceil(busquedas.length / paginacion);
+      let actualPageNumber = 1;
 
       var renderPagination = function () {
         sd.innerHTML = style;
@@ -83,23 +83,21 @@ class TablaBusqueda extends HTMLElement {
         let changePage = function (option) {
           if (this.innerText == '<<') {
             actualPageNumber = 1;
-            renderPagination();
             this.disabled = true;
           } else if (this.innerText == '<') {
             if (actualPageNumber != 1) {
               actualPageNumber--;
-              renderPagination();
             }
           } else if (this.innerText == '>') {
             if (actualPageNumber != maxPage) {
               actualPageNumber++;
-              renderPagination();
             }
           } else {
             actualPageNumber = maxPage;
-            renderPagination();
             this.disabled = true;
           }
+
+          renderPagination();
         }
 
         let contenedor = document.createElement('div');
@@ -134,7 +132,7 @@ class TablaBusqueda extends HTMLElement {
 
         let maxIndex = actualPageNumber == maxPage ? busquedas.length : paginacion * actualPageNumber;
 
-        for (var i = paginacion * actualPageNumber - paginacion; i < maxIndex; i++) { //AA
+        for (var i = paginacion * actualPageNumber - paginacion; i < maxIndex; i++) {
           tr = tabla.insertRow(-1);
           for (var j = 0; j < columna.length; j++) {
             var newCelda = tr.insertCell(-1);
@@ -162,25 +160,25 @@ class TablaBusqueda extends HTMLElement {
         //tableTitle.innerText = this.getAttribute("busqueda");
         tableTitleBar.appendChild(tableTitle);
 
-        let buttonFirst = document.createElement("button"); //AA
-        let buttonPrevious = document.createElement("button"); //AA
-        let buttonNext = document.createElement("button"); //AA
-        let buttonLast = document.createElement("button"); //AA
+        let buttonFirst = document.createElement("button");
+        let buttonPrevious = document.createElement("button");
+        let buttonNext = document.createElement("button");
+        let buttonLast = document.createElement("button");
         let span = document.createElement("span");
-        buttonFirst.innerText = "<<"; //AA
+        buttonFirst.innerText = "<<";
         buttonFirst.onclick = changePage;
-        buttonPrevious.innerText = "<"; //AA
+        buttonPrevious.innerText = "<";
         buttonPrevious.onclick = changePage;
-        buttonNext.innerText = ">" //AA
+        buttonNext.innerText = ">"
         buttonNext.onclick = changePage;
-        buttonLast.innerText = ">>"; //AA
+        buttonLast.innerText = ">>";
         buttonLast.onclick = changePage;
-        span.innerText = "Page " + actualPageNumber + " of " + maxPage; //AA
-        paginacionBar.appendChild(buttonFirst); //AA
-        paginacionBar.appendChild(buttonPrevious); //AA
-        paginacionBar.appendChild(span); //AA
-        paginacionBar.appendChild(buttonNext); //AA
-        paginacionBar.appendChild(buttonLast); //AA
+        span.innerText = "Page " + actualPageNumber + " of " + maxPage;
+        paginacionBar.appendChild(buttonFirst);
+        paginacionBar.appendChild(buttonPrevious);
+        paginacionBar.appendChild(span);
+        paginacionBar.appendChild(buttonNext);
+        paginacionBar.appendChild(buttonLast);
 
         sd.appendChild(tableTitleBar);
         sd.appendChild(contenedor);
@@ -191,16 +189,16 @@ class TablaBusqueda extends HTMLElement {
     }
 
     let accion = function (entidad, metodo, paginacion) {// AA
-      fetch(`http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/${entidad}/${metodo}`).then(function (respuesta) {
+      fetch(`https://jsonplaceholder.typicode.com/albums`).then(function (respuesta) {
         // Convertir a JSON
         return respuesta.json();
       }).then(function (j) {
         // Ahora 'j' es un objeto JSON
-        crearTablaEntidad(j, paginacion); //AA
+        crearTablaEntidad(j, paginacion);
         console.log(j);
       });
     }
-    accion(this.getAttribute("busqueda"), this.getAttribute("metodo"), this.getAttribute("paginacion")); //AA
+    accion(this.getAttribute("busqueda"), this.getAttribute("metodo"), this.getAttribute("paginacion"));
   }
 }
 window.customElements.define('tabla-dinamica', TablaBusqueda);
