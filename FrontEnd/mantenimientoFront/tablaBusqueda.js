@@ -18,14 +18,14 @@ class TablaBusqueda extends HTMLElement{
           border-style: solid;
           color: #000000;
         }
-        
+
         td, th {
           border-width: 2px;
           border-color: #636bf3;
           border-style: solid;
           padding: 3px;
         }
-        
+
         th {
           background-color: #479600;
         }
@@ -34,7 +34,6 @@ class TablaBusqueda extends HTMLElement{
         <div>
             <slot entidad = 'entidad'></slot>
         </div>`
-
 
         const contenedor = document.createElement('div');
         contenedor.id = 'tablaContenedor';
@@ -48,15 +47,39 @@ class TablaBusqueda extends HTMLElement{
         let celda = document.createElement('td');
         celda.id = 'celdaEntidad';
 
-        let jsonEntidad = []
-
         //Recibe un json con la busqueda deseada
         let crearTablaEntidad = function(busquedas, paginacion){
           let maxPage = Math.ceil(busquedas.length / paginacion); //AA
           let actualPageNumber = 1; //AA
 
           var renderPagination = function() {
-            sd.innerHTML = '';
+            sd.innerHTML = `<style>
+            table{
+              width: 100%;
+              background-color: #ffffff;
+              border-collapse: collapse;
+              border-width: 2px;
+              border-color: #636bf3;
+              border-style: solid;
+              color: #000000;
+            }
+
+            td, th {
+              border-width: 2px;
+              border-color: #636bf3;
+              border-style: solid;
+              padding: 3px;
+            }
+
+            th {
+              background-color: #479600;
+            }
+            tr:hover {background-color:#f5f5f5;}
+            </style>
+            <div>
+                <slot entidad = 'entidad'></slot>
+            </div>`
+            
             let changePage = function(option) {
               if (this.innerText == '<<') {
                 actualPageNumber = 1;
