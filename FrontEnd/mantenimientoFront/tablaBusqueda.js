@@ -137,16 +137,10 @@ class TablaBusqueda extends HTMLElement {
           for (var j = 0; j < columna.length; j++) {
             var newCelda = tr.insertCell(-1);
             newCelda.innerHTML = busquedas[i][columna[j]];
-             newCelda.onclick = function(){
-                var fila = tabla.rows.length;
-                for(var k = 0; k < fila; k++){
-                    var filaSelect = tabla.rows[k].rowIndex;
-                    for(var m = 0; m < filaSelect; m++){
-                        var filaElegida = tabla.rows[m].innerText;
-                        console.log(filaElegida);
-                    }
-                    }
-                };
+              tr.onclick = function(){
+
+                console.log(this.innerText);
+              };
           }
         }
 
