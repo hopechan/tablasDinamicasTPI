@@ -39,6 +39,20 @@ class TablaBusqueda extends HTMLElement {
         #paginacionBar * {
           margin: 3px;
         }
+
+        button {
+          background-color: #C6D8D3;
+          border-style: solid;
+          border-width: 2px;
+          border-color: #331832;
+          border-radius: 5px;
+          font-weight: bold;
+          padding: 7px;
+        }
+
+        button:hover {
+          background-color: #D81E5B;
+        }
         </style>
         <div>
             <slot entidad = 'entidad'></slot>
