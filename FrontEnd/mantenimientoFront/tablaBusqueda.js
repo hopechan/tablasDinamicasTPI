@@ -137,7 +137,7 @@ class TablaBusqueda extends HTMLElement {
           for (var j = 0; j < columna.length; j++) {
             var newCelda = tr.insertCell(-1);
             newCelda.innerHTML = busquedas[i][columna[j]];
-             tr.addEventListener("click", function(){
+             newCelda.onclick = function(){
                 var fila = tabla.rows.length;
                 for(var k = 0; k < fila; k++){
                     var filaSelect = tabla.rows[k].rowIndex;
@@ -146,7 +146,7 @@ class TablaBusqueda extends HTMLElement {
                         console.log(filaElegida);
                     }
                     }
-                },true);
+                };
           }
         }
 
@@ -195,7 +195,6 @@ class TablaBusqueda extends HTMLElement {
       }).then(function (j) {
         // Ahora 'j' es un objeto JSON
         crearTablaEntidad(j, paginacion);
-        console.log(j);
       });
     }
     accion(this.getAttribute("busqueda"), this.getAttribute("metodo"), this.getAttribute("paginacion"));
