@@ -183,7 +183,7 @@ class TablaBusqueda extends HTMLElement {
     }
 
     let accion = function (entidad, metodo, paginacion) {// AA
-      fetch(`https://jsonplaceholder.typicode.com/albums`).then(function (respuesta) {
+      fetch(`http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/${entidad}/${metodo}`).then(function (respuesta) {
         // Convertir a JSON
         return respuesta.json();
       }).then(function (j) {
