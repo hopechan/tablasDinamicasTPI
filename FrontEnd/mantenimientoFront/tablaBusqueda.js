@@ -8,6 +8,32 @@ class TablaBusqueda extends HTMLElement{
     connectedCallback(){
         //sd -> shadowDom
         const sd = this.attachShadow({mode:'open'});
+        sd.innerHTML = `<style>
+        table{
+          width: 100%;
+          background-color: #ffffff;
+          border-collapse: collapse;
+          border-width: 2px;
+          border-color: #636bf3;
+          border-style: solid;
+          color: #000000;
+        }
+        
+        td, th {
+          border-width: 2px;
+          border-color: #636bf3;
+          border-style: solid;
+          padding: 3px;
+        }
+        
+        th {
+          background-color: #479600;
+        }
+        tr:hover {background-color:#f5f5f5;}
+        </style>
+        <div>
+            <slot entidad = 'entidad'></slot>
+        </div>`
         const contenedor = document.createElement('div');
         contenedor.id = 'tablaContenedor';
 
