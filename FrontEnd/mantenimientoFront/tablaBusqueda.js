@@ -66,11 +66,11 @@ class TablaBusqueda extends HTMLElement {
     let tabla = document.createElement('table');
     tabla.id = 'tablaEntidad'
 
-    let cabecera = document.createElement('th');
+    /*let cabecera = document.createElement('th');
     cabecera.id = 'cabeceraEntidad'
 
     let celda = document.createElement('td');
-    celda.id = 'celdaEntidad';
+    celda.id = 'celdaEntidad';*/
 
     //Recibe un json con la busqueda deseada
     let crearTablaEntidad = function (busquedas, paginacion) {
@@ -106,11 +106,11 @@ class TablaBusqueda extends HTMLElement {
         let tabla = document.createElement('table');
         tabla.id = 'tablaEntidad'
 
-        let cabecera = document.createElement('th');
+        /*let cabecera = document.createElement('th');
         cabecera.id = 'cabeceraEntidad'
 
         let celda = document.createElement('td');
-        celda.id = 'celdaEntidad';
+        celda.id = 'celdaEntidad';*/
 
         let columna = [];
 
@@ -183,7 +183,7 @@ class TablaBusqueda extends HTMLElement {
     }
 
     let accion = function (entidad, metodo, paginacion) {// AA
-      fetch(`http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/${entidad}/${metodo}`).then(function (respuesta) {
+      fetch(`https://jsonplaceholder.typicode.com/albums`).then(function (respuesta) {
         // Convertir a JSON
         return respuesta.json();
       }).then(function (j) {
@@ -191,7 +191,7 @@ class TablaBusqueda extends HTMLElement {
         crearTablaEntidad(j, paginacion);
       });
     }
-    accion(this.getAttribute("busqueda"), this.getAttribute("metodo"), this.getAttribute("paginacion"));
+    accion(this.getAttribute("busqueda"), this.getAttribute("metodo"), this.getAttribute("paginado"));
   }
 }
 window.customElements.define('tabla-dinamica', TablaBusqueda);
