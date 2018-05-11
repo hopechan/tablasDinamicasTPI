@@ -8,14 +8,13 @@ services:
         - 'MYSQL_ROOT_PASSWORD=1234'
         ports:
         - '3306:3306'
-        volumes:
-        - ./mariadblMantenimientoVol:/var/lib/mysql
     paymantenimiento: 
         image: 'microserver'
         build: ./Payaramicro/.   
         container_name: 'payaramicro'
         depends_on:
         - marmantenimiento
+        command: dockerize -wait http://172.24.0.2:3306 -timeout 20s
         ports:
         - '8080:8080'
     
