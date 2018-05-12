@@ -14,6 +14,7 @@ services:
         container_name: 'payaramicro'
         depends_on:
         - marmantenimiento
+        command: dockerize -wait http://marmantenimiento:3306 -timeout 20s
         ports:
         - '8080:8080'
     
@@ -25,6 +26,8 @@ services:
         - paymantenimiento
         ports: 
         - '80:80'
+        volumes:
+        - ./FrontEnd/mantenimientoFront:/usr/local/apache2/htdocs/
           
        
        
