@@ -9,12 +9,12 @@ RUN   apk update \
  adduser -D -h $PAYARA_PATH payara && echo payara:payara | chpasswd && \
  chown -R payara:payara /opt
 
-RUN apk -U add openssl
+#RUN apk -U add openssl
 
-ENV VERSION v0.3.0
-ENV DOWNLOAD_URL https://github.com/jwilder/dockerize/releases/download/$VERSION/dockerize-alpine-linux-amd64-$VERSION.tar.gz
+#ENV VERSION v0.3.0
+#ENV DOWNLOAD_URL https://github.com/jwilder/dockerize/releases/download/$VERSION/dockerize-alpine-linux-amd64-$VERSION.tar.gz
 
-RUN wget -qO- $DOWNLOAD_URL | tar xvz -C /usr/local/bin
+#RUN wget -qO- $DOWNLOAD_URL | tar xvz -C /usr/local/bin
 
 ENV PAYARA_PKG https://s3-eu-west-1.amazonaws.com/payara.fish/payara-5-micro-prerelease.jar
 ENV PAYARA_VERSION prerelease
@@ -31,6 +31,7 @@ EXPOSE 4848 8009 8080 8181
 
 USER payara
 WORKDIR $PAYARA_PATH
+ADD wait-for $PAYARA_PATH
 ADD  SistemaTPI135-web-1.0-SNAPSHOT.war $PAYARA_PATH/deployments/SistemaTPI135-web-1.0-SNAPSHOT.war
 ADD mysql-connector-java-5.1.22-bin.jar $PAYARA_PATH
 ADD postbootfile.txt $PAYARA_PATH
