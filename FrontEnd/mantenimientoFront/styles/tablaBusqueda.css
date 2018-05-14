@@ -1,0 +1,45 @@
+* {
+  font-family: "Gill Sans", sans-serif;
+}
+
+table {
+  width: 100%;
+  background-color: #fdf0d5;
+}
+
+td,
+th {
+  text-align: center;
+  padding: 3px;
+}
+
+th {
+  background-color: #f0544f;
+}
+
+tr:hover {
+  background-color: #c6d8d3;
+}
+
+#paginacionBar {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#paginacionBar * {
+  margin: 3px;
+}
+
+button {
+  background-color: #c6d8d3;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #331832;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 7px;
+}
+
+button:hover {
+  background-color: #d81e5b;
+}
