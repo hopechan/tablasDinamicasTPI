@@ -8,6 +8,7 @@ services:
         - 'MYSQL_ROOT_PASSWORD=1234'
         ports:
         - '3306:3306'
+    
     paymantenimiento: 
         image: 'microserver'
         build: ./Payaramicro/.   
@@ -25,6 +26,8 @@ services:
         - paymantenimiento
         ports: 
         - '80:80'
+        volumes:
+        - ./FrontEnd/mantenimientoFront:/usr/local/apache2/htdocs/
           
        
        
