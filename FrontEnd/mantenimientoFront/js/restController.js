@@ -7,32 +7,32 @@ import GetDatos from "./getData.js";
 class RestController extends OrigenResource{
     constructor() {
         super();
-        this.url_findAll = `http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/marca/findAll`;
-        this.url_findById = `http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/marca/1`;
-        this.url_findByRange = `http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/marca/0/3`;
-        this.url_count = `http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/marca/count`;
+        this.url_base = `http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources`;
     }
 
-    findAll(){
-        return GetDatos.getDatos(this.url_findAll).then(data => {
+    findAll(entidad){
+        return GetDatos.getDatos(`${this.url_base}/${entidad}/findAll`).then(data => {
             return data
         });
     }
 
-    findById(){
-        return GetDatos.getDatos(this.url_findById).then(data => {
+    findById(entidad, id){
+        return GetDatos.getDatos(`${this.url_base}/${entidad}/${id}`).then(data => {
             return id_data
         });
     }
-
-    findByRange(){
-        return GetDatos.getDatos(this.url_findByRange).then(data =>{
+/**
+ * a => limite inferior
+ * b => limite superior 
+ */
+    findByRange(entidad, a, b){
+        return GetDatos.getDatos(`${this.url_base}/${entidad}/${a}/${b}`).then(data =>{
             return rango
         });
     }
 
-    count(){
-        return GetDatos.getDatos(this.url_count).then(data => {
+    count(entidad){
+        return GetDatos.getDatos(`${this.url_base}/${entidad}/count`).then(data => {
             return totalDatos
         });
     }
