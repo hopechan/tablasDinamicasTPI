@@ -1,43 +1,42 @@
-import OrigenResource from "./origenResource";
-//Clase para manejar todos los rest del middleware :v
-class RestController extends OrigenResouce{
-    constructor(entidad, metodo) {
+import OrigenResource from "./origenResource.js";
+import GetDatos from "./getData.js";
+/**
+ * Clase para consumir rest
+ * Los metodos POST, GET, PUT DELETE son puestos de manera "HardCode"
+ */
+class RestController extends OrigenResource{
+    constructor() {
         super();
-        let entidad = null;
-        let metodo = null;
-        let url = super.getUrl;
-    }
-    //en teoria crea la url completa (aun en testing)
-    create(entidad){
-        if (entidad =! null) {
-            super.setEntidad(entidad);
-            super.setMetodo("create");
-            url = super.getUrl();
-            return url;
-        } else {        
-            console.log("no funciona :'v")
-        }
+        this.url_findAll = `http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/marca/findAll`;
+        this.url_findById = `http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/marca/1`;
+        this.url_findByRange = `http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/marca/0/3`;
+        this.url_count = `http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/marca/count`;
     }
 
-    findAll(entidad){
-        if (entidad =! null) {
-            super.setEntidad(entidad);
-            super.setMetodo("create");
-            url = super.getUrl();
-            return url;
-        } else {        
-            console.log("no funciona :'v")
-        }
+    findAll(){
+        return GetDatos.getDatos(this.url_findAll).then(data => {
+            return data
+        });
     }
 
-    crear = function(){
-        url = super.getUrl();
-        //return url;
-        return "funciona :v";
+    findById(){
+        return GetDatos.getDatos(this.url_findById).then(data => {
+            return id_data
+        });
     }
+
+    findByRange(){
+        return GetDatos.getDatos(this.url_findByRange).then(data =>{
+            return rango
+        });
+    }
+
+    count(){
+        return GetDatos.getDatos(this.url_count).then(data => {
+            return totalDatos
+        });
+    }
+
+
 }
-export default RestController;
-
-
-
-
+export default new RestController;

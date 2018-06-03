@@ -1,24 +1,33 @@
 class AbstractResource{
-    constructor(){
-        this._entidad = _entidad;
-        this._metodo = _metodo;
+    /**
+     * 
+     * Clase que define que entidad y metodo se esta utilizando
+     * El orden de funcionamiento en teoria seria:
+     * 1.-abstractResource => se define entidad y metodo
+     * 2.-origenResource   => se forma la url
+     * 3.-restController   => se consume el rest
+     * 
+     */
+    constructor(entidad, metodo){
+        this.entidad = entidad;
+        this.metodo = metodo;
     }
     //getters
     get getEntidad(){
-        return this._entidad;
+        return this.entidad;
     }
 
     get getMetodo(){
-        return this._metodo;
+        return this.metodo;
     }
 
     //setters
-    set setEntidad(_entidad){
-        this._entidad = _entidad;
+    set setEntidad(entidad){
+        this.entidad = entidad;
     }
 
-    set setMetodo(_metodo){
-        this._metodo = _metodo;
+    set setMetodo(metodo){
+        this.metodo = metodo;
     }
 
 }

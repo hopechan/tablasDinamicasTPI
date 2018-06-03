@@ -1,8 +1,8 @@
+import RestController from "./restController.js";
+
 class TablaBusqueda extends HTMLElement {
   constructor() {
     super();
-    this._busquedas = null;
-    this._metodo = null;
   }
 
   connectedCallback() {
@@ -182,16 +182,14 @@ class TablaBusqueda extends HTMLElement {
       renderPagination();
     }
 
-    let accion = function (entidad, metodo, paginacion) {// AA
-      fetch(`http://localhost:8080/SistemaTPI135-web-1.0-SNAPSHOT/webresources/${entidad}/${metodo}`).then(function (respuesta) {
-        // Convertir a JSON
-        return respuesta.json();
-      }).then(function (j) {
-        // Ahora 'j' es un objeto JSON
-        crearTablaEntidad(j, paginacion);
+    let accion = function (entidad, paginacion) {// AA
+      var respuestaPromesa = RestController.findAll().then(data => {
+        return crearTablaEntidad(data, paginacion)
       });
+      //crearTablaEntidad(RestController.findAll(), paginacion);
     }
-    accion(this.getAttribute("busqueda"), this.getAttribute("metodo"), this.getAttribute("paginacion"));
+    accion(this.getAttribute("busqueda"), this.getAttribute("paginacion"));
   }
 }
 window.customElements.define('tabla-dinamica', TablaBusqueda);
+export default TablaBusqueda;
