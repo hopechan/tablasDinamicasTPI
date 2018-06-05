@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
     <title>Rest Dinamico TPI135 2018</title>
-    <script src="./js/tablaBusqueda.js"></script>
+    <script type="module" src="./js/main/tablaBusqueda.js"></script>
+    <script type="module" src="./js/main/restController.js"></script>
+    <script type="module" src="./js/main/origenResource.js"></script>
+    <script type="module" src="./js/main/abstractResource.js"></script>
+    <script type="module" src="./js/main/getData.js"></script>
 </head>
     <body>
-        <tabla-dinamica busqueda="marca", metodo="findAll", paginacion="5"></tabla-dinamica>
+        <tabla-dinamica busqueda="marca", paginacion="5"></tabla-dinamica>
     </body>
     <footer>
         <hr>
