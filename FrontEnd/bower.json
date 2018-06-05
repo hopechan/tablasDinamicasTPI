@@ -1,0 +1,22 @@
+{
+  "name": "mantenimientoTPI",
+  "description": "Sistema de mantenimiento",
+  "main": "server.js",
+  "authors": [
+    "Esperanza Dueañas <da13002@ues.edu.sv>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/hopechan/tablasDinamicasTPI",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vaadin-date-picker": "vaadin/vaadin-date-picker#^3.1.0",
+    "vaadin-button": "vaadin/vaadin-button#^2.0.1"
+  }
+}
