@@ -1,0 +1,14 @@
+{
+  "name": "mantenimientoTPI",
+  "version": "1.0.0",
+  "description": "Sistema de mantenimiento",
+  "author": "Esperanza Dueañas <da13002@ues.edu.sv>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+
+    "express": "^4.16.1"
+  }
+}
