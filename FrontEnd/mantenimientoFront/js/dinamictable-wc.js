@@ -1,77 +1,119 @@
+import RestController from "./restController.js"
+
 class DinamicTableWC extends HTMLElement {
   constructor() {
     super();
-    this.data = [
-      {"activo":true,"id":2,"modeloCollection":[],"nombre":"ASUS","observaciones":"  "},
-      {"activo":false,"id":4,"modeloCollection":[],"nombre":"VAIO","observaciones":"  "},
-      {"activo":true,"id":5,"modeloCollection":[],"nombre":"SAMSUNG","observaciones":"  "},
-      {"activo":true,"id":6,"modeloCollection":[],"nombre":"TOSHIBA","observaciones":"  "},
-      {"activo":true,"id":7,"modeloCollection":[],"nombre":"MAC","observaciones":"  "},
-      {"activo":true,"id":8,"modeloCollection":[],"nombre":"ACER","observaciones":"  "},
-      {"activo":true,"id":10,"modeloCollection":[],"nombre":"ALIENWARE","observaciones":"  "}
-    ]
+    this.entidad = this.getAttribute('entidad')
   }
 
   connectedCallback() {
     const sd = this.attachShadow({mode: "open"})
+    let style = `<style>
+        * {
+          font-family: "Gill Sans", sans-serif;
+        }
+
+        table{
+          width: 100%;
+          background-color: #FDF0D5;
+        }
+
+        td, th {
+          text-align: center;
+          padding: 3px;
+        }
+
+        th {
+          background-color: #F0544F;
+        }
+
+        tr:hover {
+          background-color:#C6D8D3;
+        }
+
+        #paginacionBar {
+          text-align: center;
+          margin-top: 20px;
+        }
+
+        #paginacionBar * {
+          margin: 3px;
+        }
+
+        button {
+          background-color: #C6D8D3;
+          border-style: solid;
+          border-width: 2px;
+          border-color: #331832;
+          border-radius: 5px;
+          font-weight: bold;
+          padding: 7px;
+        }
+
+        button:hover {
+          background-color: #D81E5B;
+        }
+        </style>`
+
+        sd.innerHTML = style
 
     const table = document.createElement("table")
-    const header = document.createElement("th")
-    const cell = document.createElement("td")
 
-    let papa = this.parentNode.querySelector("search-wc")
+    const searchWC = this.parentNode.querySelector("search-wc")
 
-    console.log(papa)
-
-    papa.addEventListener("newdata", function(){
-      console.log("New data received!!")
+    searchWC.addEventListener("newdata", (e) => {
+      renderData(e.detail.data)
     })
 
-    papa.addEventListener("click", function(){
-      console.log("You clicked me >:v")
-    })
 
-    var self = this.data
-    //console.log(self)
-    function renderData() {
-      let columnas = [];
+    var columns = []
+    var entidad = this.entidad
 
-      for (var i = 0; i < self.length; i++) {
-        for (var key in self[i]) {
-          if (columnas.indexOf(key) === -1) {
-            columnas.push(key);
+    function renderData(data) {
+      if (data && data.length !== 0) {
+        table.innerHTML = ''
+
+        for (var i = 0; i < data.length; i++) {
+          for (var key in data[i]) {
+            if (columns.indexOf(key) === -1 && !(key.indexOf("Collection") !== -1)) {
+              columns.push(key)
+            }
           }
         }
-      }
 
-      var tr = table.insertRow(-1);
+        var tr = table.insertRow(-1)
 
-      for (var i = 0; i < columnas.length; i++) {
-        var th = document.createElement('th');
-        th.innerHTML = columnas[i];
-        tr.appendChild(th);
-      }
-
-      for (var i = 0; i < self.length; i++) {
-        tr = table.insertRow(-1);
-        for (var j = 0; j < columnas.length; j++) {
-          var newCelda = tr.insertCell(-1);
-          newCelda.innerHTML = self[i][columnas[j]];
-          tr.onclick = function(){
-
-            console.log(this.innerText);
-          };
+        for (var i = 0; i < columns.length; i++) {
+          var th = document.createElement('th')
+          th.innerHTML = columns[i]
+          tr.appendChild(th)
         }
+
+        for (var i = 0; i < data.length; i++) {
+          tr = table.insertRow(-1)
+          for (var j = 0; j < columns.length; j++) {
+            var newCelda = tr.insertCell(-1)
+            newCelda.innerHTML = data[i][columns[j]]
+            tr.onclick = function(){
+              console.log(this.innerText)
+            }
+          }
+        }
+      } else {
+        RestController.findAll(entidad).then((data) => {
+          renderData(data)
+        })
       }
 
       sd.appendChild(table)
     }
 
-    renderData()
+    RestController.findAll(this.entidad).then((data) => {
+      renderData(data)
+    })
   }
 
 
 }
 
 window.customElements.define("dinamictable-wc", DinamicTableWC)
-export default DinamicTableWC
