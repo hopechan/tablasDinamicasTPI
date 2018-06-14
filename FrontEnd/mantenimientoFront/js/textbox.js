@@ -62,7 +62,9 @@ class TextBox extends HTMLElement{
                 case 'boton':
                 var nuevoInput = esBoton();
                 nuevoInput.value = 'Enviar';
-                nuevoInput.addEventListener("click", datosFormulario());
+                nuevoInput.addEventListener("click", e=>{
+                    datosFormulario();
+                });
                 contenedor.appendChild(nuevoInput);
                 sd.appendChild(contenedor);
                     break;
@@ -147,11 +149,11 @@ class TextBox extends HTMLElement{
             }
 
             let peticion = {
-                'id' : `${orig}`,
-                'fecha': `${fecha_data}`,
-                'observaciones': `${observaciones_data}`
+                id : `${orig}`,
+                fecha: `${fecha_data}`,
+                observaciones: `${observaciones_data}`
             };
-
+            console.log(peticion);
             RestController.create(peticion, 'peticion');
         }
 
