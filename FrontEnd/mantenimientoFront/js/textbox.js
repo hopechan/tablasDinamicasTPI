@@ -153,7 +153,7 @@ class TextBox extends HTMLElement{
             }
 
             let getEncargadoMtto = () => {
-                RestController.findByName('encargadoMantenimiento', encargadoMtto).then((data) => {
+                RestController.findByName('personalMantenimiento', encargadoMtto).then((data) => {
                     encargadoMtto = data.id
                 })
             }
@@ -200,8 +200,12 @@ class TextBox extends HTMLElement{
                 idEstado: 1
             }
 
-            console.log(peticion);
-            RestController.create(peticion, 'peticion');
+            console.log(peticion)
+            console.log(detallePeticionJSON)
+            console.log(ordenTrabajo)
+            RestController.create(peticion, 'peticion')
+            RestController.create(detallePeticionJSON, 'detallePeticion')
+            RestController.create(ordenTrabajo, 'ordenTrabajo')
         }
 
         crearEntrada(this.getAttribute("tipo"));
