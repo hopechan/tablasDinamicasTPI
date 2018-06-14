@@ -25,21 +25,10 @@
                 <label for="fecha_solicitud" id="lbl_fecha_solicitud">Fecha: </label>
                 <input type="date" name="fecha_solicitud">
 
-                <label for="nombre_solicitante" id="lbl_solicitante">Solicitante: </label>
-                <input-tpi tipo="alfabetico" name="nombre_solicitante"></input-tpi>
-
-                <label for="area_solicitante" id="lbl_area">Area</label>
-                <combobox-tpi entidad="area" busqueda="nombre" name="area"></combobox-tpi>
             </div>
             <div id="datos_equipo" class="formulario">
                 <label for="codigo_equipo" id="lbl_codigo">Codigo del Equipo</label>
-                <input-tpi tipo="numerico" name="codigo_equipo"></input-tpi>
-
-                <label for="marca_equipo" id="lbl_marca">Marca del Equipo</label>
-                <combobox-tpi entidad="marca" busqueda="nombre" name="marca"></combobox-tpi>
-
-                <label for="modelo_equipo" id="lbl_modelo">Modelo de Equipo</label>
-                <combobox-tpi entidad="modelo" busqueda="nombre" name="modelo"></combobox-tpi>
+                <combobox-tpi entidad="equipo" busqueda="id" name="equipo"></combobox-tpi>
 
                 <label for="tipo_mantenimiento" id="lbl_tipo">¿Qué tipo de mantenimiento se debe realizar?</label>
                 <combobox-tpi entidad="tipoMantenimiento" busqueda="nombre" name="tipo_mantenimiento"></combobox-tpi>
