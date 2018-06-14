@@ -61,8 +61,8 @@ class TextBox extends HTMLElement{
                     break;
                 case 'boton':
                 var nuevoInput = esBoton();
-                nuevoInput.value = 'Enviar';;
-                nuevoInput.onclick = datosFormulario();
+                nuevoInput.value = 'Enviar';
+                nuevoInput.addEventListener("click", datosFormulario());
                 contenedor.appendChild(nuevoInput);
                 sd.appendChild(contenedor);
                     break;
@@ -137,12 +137,17 @@ class TextBox extends HTMLElement{
             var modelo_data = document.getElementsByName('modelo').values;
             var tipo_data = document.getElementsByName('tipo_mantenimiento').values;
 
-            
-            var origen = RestController.findByName('origen_peticion', origen_data[0]).then(data =>{
-                return data.id_origen;
-            })
+            var orig = function(){
+                for(var i = 0; i< origen_data.length; i++){
+                    return RestController.findByName('origen_peticion', origen_data[i]).then(data =>{
+                        console.log(data.id);
+                        return data.id_origen + 1;
+                    })
+                }
+            }
 
             let peticion = {
+                'id' : `${orig}`,
                 'fecha': `${fecha_data}`,
                 'observaciones': `${observaciones_data}`
             };
