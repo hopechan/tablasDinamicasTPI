@@ -1,3 +1,6 @@
+
+import RestController from "./restController.js"
+
 class PagerWC extends HTMLElement {
   constructor() {
     super()
@@ -16,6 +19,7 @@ class PagerWC extends HTMLElement {
 
     let sendDataPaged = (e) => {
       linkThis.data = e.detail.data
+      linkThis.actualPage = 1
       linkThis.maxPage = Math.ceil(linkThis.data.length / linkThis.paginado)
       let dataChunk = []
       for (var i = 0; i < (linkThis.paginado >= linkThis.data.length ? linkThis.data.length : linkThis.paginado); i++) {
@@ -23,6 +27,7 @@ class PagerWC extends HTMLElement {
       }
       console.log(dataChunk)
       this.dispatchEvent(new CustomEvent("clickchange", {detail: {data: dataChunk}}))
+      sd.querySelector("span").textContent = `Page ${this.actualPage} of ${this.maxPage}`
     }
 
     dinamicTableWC.addEventListener("newdata", sendDataPaged)
@@ -37,47 +42,50 @@ class PagerWC extends HTMLElement {
     {type: 'button', text: '>>'}
     ]
 
-    for (var element of elements) {
-      let toAppend = document.createElement(element.type)
-      toAppend.textContent = element.text
-      sd.appendChild(toAppend)
-    }
 
-    sd.addEventListener("click", (e) => {
+    let changePage = (e) => {
       let dataChunk = []
       switch(e.target.textContent) {
         case "<<":
-          linkThis.actualPage = 1
-          for (var i = 0; i < linkThis.paginado; i++) {
-            dataChunk.push(linkThis.data[i])
-          }
-          break
+        linkThis.actualPage = 1
+        for (var i = 0; i < (linkThis.paginado >= linkThis.data.length ? linkThis.data.length : linkThis.paginado); i++) {
+          dataChunk.push(linkThis.data[i])
+        }
+        break
         case "<":
-          if (linkThis.actualPage !== 1 ) {
-            linkThis.actualPage -= 1
-          }
-          for (var i = (linkThis.paginado * linkThis.actualPage) - linkThis.paginado; i < (linkThis.paginado >= linkThis.data.length ? linkThis.data.length : linkThis.paginado * linkThis.actualPage); i++) {
-            dataChunk.push(linkThis.data[i])
-          }
-          break
+        if (linkThis.actualPage !== 1 ) {
+          linkThis.actualPage -= 1
+        }
+        for (var i = (linkThis.paginado * linkThis.actualPage) - linkThis.paginado; i < (linkThis.paginado >= linkThis.data.length ? linkThis.data.length : linkThis.paginado * linkThis.actualPage); i++) {
+          dataChunk.push(linkThis.data[i])
+        }
+        break
         case ">":
-          if (linkThis.actualPage !== linkThis.maxPage) {
-            linkThis.actualPage += 1
-          }
+        if (linkThis.actualPage !== linkThis.maxPage) {
+          linkThis.actualPage += 1
+        }
 
-          for (var i = (linkThis.paginado * linkThis.actualPage) - linkThis.paginado; i < (linkThis.actualPage === linkThis.maxPage ? linkThis.data.length : linkThis.paginado * linkThis.actualPage); i++) {
-            dataChunk.push(linkThis.data[i])
-          }
-          break
+        for (var i = (linkThis.paginado * linkThis.actualPage) - linkThis.paginado; i < (linkThis.actualPage === linkThis.maxPage ? linkThis.data.length : linkThis.paginado * linkThis.actualPage); i++) {
+          dataChunk.push(linkThis.data[i])
+        }
+        break
         case ">>":
-          linkThis.actualPage = linkThis.maxPage
-          for (var i = (linkThis.paginado * linkThis.actualPage) - linkThis.paginado; i < linkThis.data.length; i++) {
-            dataChunk.push(linkThis.data[i])
-          }
+        linkThis.actualPage = linkThis.maxPage
+        for (var i = (linkThis.paginado * linkThis.actualPage) - linkThis.paginado; i < linkThis.data.length; i++) {
+          dataChunk.push(linkThis.data[i])
+        }
       }
       console.log(dataChunk)
       this.dispatchEvent(new CustomEvent("clickchange", {detail: {data: dataChunk}}))
-    })
+      sd.querySelector("span").textContent = `Page ${this.actualPage} of ${this.maxPage}`
+    }
+
+    for (var element of elements) {
+      let toAppend = document.createElement(element.type)
+      toAppend.textContent = element.text
+      toAppend.addEventListener("click", changePage)
+      sd.appendChild(toAppend)
+    }
   }
 }
 window.customElements.define("pager-wc", PagerWC)

@@ -65,8 +65,6 @@ class DinamicTableWC extends HTMLElement {
         sd.innerHTML = style
 
     const table = document.createElement("table")
-
-    const searchWC = this.parentNode.querySelector("search-wc")
     const pagerWC = this.parentNode.querySelector("pager-wc")
 
     pagerWC.addEventListener("clickchange", (e) => {
@@ -112,7 +110,10 @@ class DinamicTableWC extends HTMLElement {
       }
       sd.appendChild(table)
     }
-    renderData(this.data)
+
+    RestController.findAll(this.entidad).then((data) => {
+      this.dispatchEvent(new CustomEvent("newdata", {detail: {data: data}}))
+    })
   }
 
 
