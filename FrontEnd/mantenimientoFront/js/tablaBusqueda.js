@@ -183,7 +183,7 @@ class TablaBusqueda extends HTMLElement {
     }
 
     let accion = function (entidad, paginacion) {// AA
-      var respuestaPromesa = RestController.findAll(entidad).then(data => {
+      var respuestaPromesa = RestController.findByRange(entidad, 1,2).then(data => {
         return crearTablaEntidad(data, paginacion)
       });
       //crearTablaEntidad(RestController.findAll(), paginacion);

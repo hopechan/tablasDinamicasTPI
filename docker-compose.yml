@@ -1,14 +1,16 @@
 version: '3.5'
 services:
     marmantenimiento:
-        image: 'localhost:5000/mariadbtpi'
+        image: 'mariadbtpi'
+        build: ./MariaDB/.
         container_name: 'mantenimientobd'
-        environment: 
+        environment:
         - 'MYSQL_ROOT_PASSWORD=1234'
         ports:
         - '3306:3306'
-    paymantenimiento: 
-        image: 'localhost:5000/microserver'
+    paymantenimiento:
+        image: 'microserver'
+        build: ./Payaramicro/.
         container_name: 'payaramicro'
         depends_on:
         - marmantenimiento
@@ -16,9 +18,10 @@ services:
         ports:
         - '8080:8080'
     frontend:
-        image: 'localhost:5000/frontend'
+        image: 'frontend'
+        build: ./FrontEnd/.
         container_name: 'frontmantenimiento'
-        depends_on: 
+        depends_on:
         - paymantenimiento
-        ports: 
+        ports:
         - '80:80'

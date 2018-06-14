@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,13 +6,47 @@
     <title>Solicitudes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="module" src="./js/tablaBusqueda.js"></script>
-    <script type="module" src="./js/restController.js"></script>
     <script type="module" src="./js/barra.js"></script>
     <script type="module" src="./js/textbox.js"></script>
+    <script type="module" src="./js/combobox.js"></script>
+    <script type="module" src="./js/boton.js"></script>
+    <script type="module" src="./js/getForm.js"></script>
+    <script type="module" src="./js/restController.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/form.css"/>
 </head>
 <body style="margin: 0;">
     <barra-tpi></barra-tpi>
-    <form>
-    </form>
+    <div style="margin-left:120px;padding:1px 16px;height:600px;">
+        <form>
+            <div id="datos_solicitante" class="formulario">
+                <label for="origen" id="lbl_origen">Origen: </label>
+                <combobox-tpi entidad="origenPeticion" busqueda="nombre" name="origen"></combobox-tpi>
+
+                <label for="fecha_solicitud" id="lbl_fecha_solicitud">Fecha: </label>
+                <input type="date" name="fecha_solicitud">
+
+                <label for="nombre_solicitante" id="lbl_solicitante">Solicitante: </label>
+                <input-tpi tipo="alfabetico" name="nombre_solicitante"></input-tpi>
+
+                <label for="area_solicitante" id="lbl_area">Area</label>
+                <combobox-tpi entidad="area" busqueda="nombre" name="area"></combobox-tpi>
+            </div>
+            <div id="datos_equipo" class="formulario">
+                <label for="codigo_equipo" id="lbl_codigo">Codigo del Equipo</label>
+                <input-tpi tipo="numerico" name="codigo_equipo"></input-tpi>
+
+                <label for="marca_equipo" id="lbl_marca">Marca del Equipo</label>
+                <combobox-tpi entidad="marca" busqueda="nombre" name="marca"></combobox-tpi>
+
+                <label for="modelo_equipo" id="lbl_modelo">Modelo de Equipo</label>
+                <combobox-tpi entidad="modelo" busqueda="nombre" name="modelo"></combobox-tpi>
+
+                <label for="tipo_mantenimiento" id="lbl_tipo">¿Qué tipo de mantenimiento se debe realizar?</label>
+                <combobox-tpi entidad="tipoMantenimiento" busqueda="nombre" name="tipo_mantenimiento"></combobox-tpi>
+
+                <input-tpi tipo="boton" ></input-tpi>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
