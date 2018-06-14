@@ -1,14 +1,14 @@
 version: '3.5'
 services:
     marmantenimiento:
-        image: 'Rodriguez:5000/mariadbtpi'
+        image: 'localhost:5000/mariadbtpi'
         container_name: 'mantenimientobd'
         environment: 
         - 'MYSQL_ROOT_PASSWORD=1234'
         ports:
         - '3306:3306'
     paymantenimiento: 
-        image: 'Rodriguez:5000/microserver'
+        image: 'localhost:5000/microserver'
         container_name: 'payaramicro'
         depends_on:
         - marmantenimiento
@@ -16,7 +16,7 @@ services:
         ports:
         - '8080:8080'
     frontend:
-        image: 'Rodriguez:5000/frontend'
+        image: 'localhost:5000/frontend'
         container_name: 'frontmantenimiento'
         depends_on: 
         - paymantenimiento
