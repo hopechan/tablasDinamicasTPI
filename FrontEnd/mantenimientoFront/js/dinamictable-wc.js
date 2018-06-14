@@ -70,14 +70,8 @@ class DinamicTableWC extends HTMLElement {
     const pagerWC = this.parentNode.querySelector("pager-wc")
 
     pagerWC.addEventListener("clickchange", (e) => {
-      console.log(e.detail.clicked)
-    })
-
-    searchWC.addEventListener("newdata", (e) => {
-      linkThis.data = e.detail.data
       renderData(e.detail.data)
     })
-
 
     var columns = []
 
@@ -113,8 +107,7 @@ class DinamicTableWC extends HTMLElement {
         }
       } else {
         RestController.findAll(linkThis.entidad).then((data) => {
-          renderData(data)
-          linkThis.data = data
+          linkThis.dispatchEvent(new CustomEvent("newdata", {detail: {data: data}}))
         })
       }
       sd.appendChild(table)

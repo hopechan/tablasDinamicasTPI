@@ -5,11 +5,17 @@
     <script type="module" src="./js/tablaBusqueda.js"></script>
     <script type="module" src="./js/restController.js"></script>
     <script type="module" src="./js/barra.js"></script>
+    <script type="module" src="js/search-wc.js"></script>
+    <script type="module" src="js/dinamictable-wc.js"></script>
+    <script type="module" src="js/pager-wc.js"></script>
 </head>
     <body style="margin: 0;">
         <barra-tpi></barra-tpi>
         <div style="margin-left:120px;padding:1px 16px;height:600px;">
-            <tabla-dinamica busqueda="marca" paginacion="5"></tabla-dinamica>
+            <!--<tabla-dinamica busqueda="marca" paginacion="5"></tabla-dinamica>-->
+            <search-wc entidad="marca"></search-wc>
+            <dinamictable-wc entidad="marca"></dinamictable-wc>
+            <pager-wc paginado="4"></pager-wc>
         </div>
     </body>
 </html>
