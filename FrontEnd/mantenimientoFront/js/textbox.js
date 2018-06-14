@@ -136,7 +136,7 @@ class TextBox extends HTMLElement{
             //var area_data = document.getElementByName('area').value;
             let equipo = document.querySelector('combobox-tpi[entidad="equipo"]').value
             let tipoMtto = document.querySelector('combobox-tpi[entidad="tipoMantenimiento"]').value
-            let encargadoMtto = document.querySelector('combobox-tpi[entidad="encargadoMantenimiento"]').value
+            let encargadoMtto = document.querySelector('combobox-tpi[entidad="personalMantenimiento"]').value
             //var tipo_data = document.getElementByName('tipo_mantenimiento').value;
             let ordenTrabajoID
 
