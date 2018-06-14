@@ -50,7 +50,7 @@ class RestController extends OrigenResource{
     }
     //recibe un object {}, no un Json
     create(datos, entidad){
-        return GetDatos.setDatos(datos, `${this.url_base}/${entidad}/crear`).then(estadoCreado => {
+        return GetDatos.postDatos(datos, `${this.url_base}/${entidad}/crear`).then(estadoCreado => {
             return estadoCreado
         });
     }

@@ -1,3 +1,5 @@
+import RestController from "./restController.js";
+
 class TextBox extends HTMLElement{
     /**
      * Webcomponet con mayor utilidad que el de Barra :v
@@ -57,6 +59,13 @@ class TextBox extends HTMLElement{
                 contenedor.appendChild(nuevoInput);
                 sd.appendChild(contenedor);
                     break;
+                case 'boton':
+                var nuevoInput = esBoton();
+                nuevoInput.value = 'Enviar';;
+                nuevoInput.onclick = datosFormulario();
+                contenedor.appendChild(nuevoInput);
+                sd.appendChild(contenedor);
+                    break;
                 default:
                     break;
             }
@@ -99,6 +108,12 @@ class TextBox extends HTMLElement{
             return entrada;
         }
 
+        let esBoton = function(){
+            const entrada = document.createElement('input');
+            entrada.type = 'button';
+            return entrada;
+        }
+
         let estiloEntrada = function(elemento){
             //var elemento = document.createElement('input');
             elemento.style.width = '500px';
@@ -108,6 +123,31 @@ class TextBox extends HTMLElement{
             elemento.style.padding = '4px 7px';
             elemento.style.outline = '0';
             elemento.style.borderColor = '#A5A5AF';
+        }
+
+        let datosFormulario = function(){
+            var ticket_data = document.getElementsByName('ticket').values;
+            var origen_data = document.getElementsByName('origen').values;
+            var fecha_data = document.getElementsByName('fecha_solicitud').values;
+            var solicitante_data = document.getElementsByName('solicitante').values;
+            var observaciones_data = document.getElementsByName('obsevaciones').values;
+            var area_data = document.getElementsByName('area').values;
+            var equipo_data = document.getElementsByName('codigo_equipo').values;
+            var marca_data = document.getElementsByName('marca').values;
+            var modelo_data = document.getElementsByName('modelo').values;
+            var tipo_data = document.getElementsByName('tipo_mantenimiento').values;
+
+            
+            var origen = RestController.findByName('origen_peticion', origen_data[0]).then(data =>{
+                return data.id_origen;
+            })
+
+            let peticion = {
+                'fecha': `${fecha_data}`,
+                'observaciones': `${observaciones_data}`
+            };
+
+            RestController.create(peticion, 'peticion');
         }
 
         crearEntrada(this.getAttribute("tipo"));

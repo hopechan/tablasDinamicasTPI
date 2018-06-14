@@ -1,3 +1,5 @@
+import GetForm from "./getForm.js";
+
 class Boton extends HTMLElement{
     constructor(){
         super();
@@ -9,16 +11,14 @@ class Boton extends HTMLElement{
         const contenedor = document.createElement('div');
         contenedor.id = 'id_contenedor';
 
-        const nuevoBoton = document.createElement('button');
+        const nuevoBoton = document.createElement('input')
         nuevoBoton.id = 'id_boton';
+        nuevoBoton.type = 'button';
 
         let estiloBoton = function(texto){
-            nuevoBoton.innerHTML = texto;
+            nuevoBoton.value = texto;
             nuevoBoton.style.fontFamily = '#Gill Sans", sans-serif';
-            nuevoBoton.style.color ="#A5A5AF";
-            nuevoBoton.style.padding = '4px 7px';
-            nuevoBoton.style.borderRadius = '15px';
-            nuevoBoton.style.border = '2px solid #ccc';
+            //nuevoBoton.onclick = GetForm.recolectarDatos();
             contenedor.appendChild(nuevoBoton);
             sd.appendChild(contenedor);
         }
