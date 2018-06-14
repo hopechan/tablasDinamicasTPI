@@ -17,11 +17,11 @@ services:
         command: dockerize -wait http://marmantenimiento:3306 -timeout 20s
         ports:
         - '8080:8080'
-    #frontend:
-    #    image: 'frontend'
-    #    build: ./FrontEnd/.
-    #    container_name: 'frontmantenimiento'
-    #    depends_on: 
-    #    - paymantenimiento
-    #    ports: 
-    #    - '80:80'
+    frontend:
+        image: 'frontend'
+        build: ./FrontEnd/.
+        container_name: 'frontmantenimiento'
+        depends_on: 
+        - paymantenimiento
+        ports: 
+        - '80:80'
