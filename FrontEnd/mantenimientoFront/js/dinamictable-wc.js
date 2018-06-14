@@ -104,9 +104,17 @@ class DinamicTableWC extends HTMLElement {
           }
         }
       } else {
-        RestController.findAll(linkThis.entidad).then((data) => {
+        /*RestController.findAll(linkThis.entidad).then((data) => {
           linkThis.dispatchEvent(new CustomEvent("newdata", {detail: {data: data}}))
-        })
+        })*/
+        table.innerHTML = ""
+        var tr = table.insertRow(-1)
+
+        for (var i = 0; i < columns.length; i++) {
+          var th = document.createElement('th')
+          th.innerHTML = columns[i]
+          tr.appendChild(th)
+        }
       }
       sd.appendChild(table)
     }
