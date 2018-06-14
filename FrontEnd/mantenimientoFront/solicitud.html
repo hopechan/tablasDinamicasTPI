@@ -11,6 +11,7 @@
     <script type="module" src="./js/combobox.js"></script>
     <script type="module" src="./js/boton.js"></script>
     <script type="module" src="./js/getForm.js"></script>
+    <script type="module" src="./js/restController.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/form.css"/>
 </head>
 <body style="margin: 0;">
@@ -18,18 +19,15 @@
     <div style="margin-left:120px;padding:1px 16px;height:600px;">
         <form>
             <div id="datos_solicitante" class="formulario">
-                <label for="ticket" id="lbl_ticket">Ticket: </label>
-                <input-tpi tipo="numerico" name="ticket"></input-tpi>
-
                 <label for="origen" id="lbl_origen">Origen: </label>
-                <combobox-tpi entidad="origen_peticion" busqueda="nombre" name="origen"></combobox-tpi>
+                <combobox-tpi entidad="origenPeticion" busqueda="nombre" name="origen"></combobox-tpi>
 
                 <label for="fecha_solicitud" id="lbl_fecha_solicitud">Fecha: </label>
-                <input type="datetime-local" name="fecha_solicitud">
+                <input type="date" name="fecha_solicitud">
 
                 <label for="nombre_solicitante" id="lbl_solicitante">Solicitante: </label>
                 <input-tpi tipo="alfabetico" name="nombre_solicitante"></input-tpi>
-                    
+                
                 <label for="area_solicitante" id="lbl_area">Area</label>
                 <combobox-tpi entidad="area" busqueda="nombre" name="area"></combobox-tpi>        
             </div>
@@ -46,9 +44,31 @@
                 <label for="tipo_mantenimiento" id="lbl_tipo">¿Qué tipo de mantenimiento se debe realizar?</label>
                 <combobox-tpi entidad="tipoMantenimiento" busqueda="nombre" name="tipo_mantenimiento"></combobox-tpi>
 
-                <input-tpi tipo="boton"></input-tpi>
+                <input-tpi tipo="boton" ></input-tpi>
             </div>
         </form>
+        <script>
+            datosFormularios(){
+                var ticket_data = document.getElementsByName('ticket').values;
+                var origen_data = document.getElementsByName('origen').values;
+                var id_origen;
+                var fecha_data = document.getElementsByName('fecha_solicitud').values;
+                var solicitante_data = document.getElementsByName('solicitante').values;
+                var observaciones_data = document.getElementsByName('obsevaciones').values;
+                var area_data = document.getElementsByName('area').values;
+                var equipo_data = document.getElementsByName('codigo_equipo').values;
+                var marca_data = document.getElementsByName('marca').values;
+                var modelo_data = document.getElementsByName('modelo').values;
+                var tipo_data = document.getElementsByName('tipo_mantenimiento').values;
+                
+                for(var i = 0; i< origen_data.length; i++){
+                    RestController.findByName('origen_peticion', origen_data[i]).then(data =>{
+                        id_origen = data.id_origen;
+                    })
+                }
+
+            }
+        </script>
     </div>
 </body>
 </html>
