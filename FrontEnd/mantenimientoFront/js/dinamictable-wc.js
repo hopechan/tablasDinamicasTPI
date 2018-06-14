@@ -4,9 +4,16 @@ class DinamicTableWC extends HTMLElement {
   constructor() {
     super();
     this.entidad = this.getAttribute('entidad')
+    this.data = null;
+    let linkThis = this
+    RestController.findAll(this.entidad).then((data) => {
+      linkThis.data = data
+    })
   }
 
   connectedCallback() {
+    let linkThis = this
+
     const sd = this.attachShadow({mode: "open"})
     let style = `<style>
         * {
@@ -58,16 +65,13 @@ class DinamicTableWC extends HTMLElement {
         sd.innerHTML = style
 
     const table = document.createElement("table")
+    const pagerWC = this.parentNode.querySelector("pager-wc")
 
-    const searchWC = this.parentNode.querySelector("search-wc")
-
-    searchWC.addEventListener("newdata", (e) => {
+    pagerWC.addEventListener("clickchange", (e) => {
       renderData(e.detail.data)
     })
 
-
     var columns = []
-    var entidad = this.entidad
 
     function renderData(data) {
       if (data && data.length !== 0) {
@@ -100,16 +104,23 @@ class DinamicTableWC extends HTMLElement {
           }
         }
       } else {
-        RestController.findAll(entidad).then((data) => {
-          renderData(data)
-        })
-      }
+        /*RestController.findAll(linkThis.entidad).then((data) => {
+          linkThis.dispatchEvent(new CustomEvent("newdata", {detail: {data: data}}))
+        })*/
+        table.innerHTML = ""
+        var tr = table.insertRow(-1)
 
+        for (var i = 0; i < columns.length; i++) {
+          var th = document.createElement('th')
+          th.innerHTML = columns[i]
+          tr.appendChild(th)
+        }
+      }
       sd.appendChild(table)
     }
 
     RestController.findAll(this.entidad).then((data) => {
-      renderData(data)
+      this.dispatchEvent(new CustomEvent("newdata", {detail: {data: data}}))
     })
   }
 
