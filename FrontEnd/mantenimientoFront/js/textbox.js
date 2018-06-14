@@ -128,31 +128,78 @@ class TextBox extends HTMLElement{
         }
 
         let datosFormulario = function(){
-            //var ticket_data = document.getElementByName('ticket').value;
-            //let origen_data = document.getElementByName('origen').value;
-            let fecha_data = document.querySelector(`input[type="date"]`).value
+            let peticionID
+            let origenPeticion = document.querySelector('combobox-tpi[entidad="origenPeticion"]').value
+            let fechaPeticion = document.querySelector(`input[type="date"]`).value
             //var solicitante_data = document.getElementByName('solicitante').value;
-            //var observaciones_data = document.getElementByName('obsevaciones').value;
+            let observaciones = document.getElementById("observaciones").value
             //var area_data = document.getElementByName('area').value;
-            //var equipo_data = document.getElementByName('codigo_equipo').value;
-            //var marca_data = document.getElementyName('marca').value;
-            //var modelo_data = document.getElementByName('modelo').value;
+            let equipo = document.querySelector('combobox-tpi[entidad="equipo"]').value
+            let tipoMtto = document.querySelector('combobox-tpi[entidad="tipoMantenimiento"]').value
+            let encargadoMtto = document.querySelector('combobox-tpi[entidad="encargadoMantenimiento"]').value
             //var tipo_data = document.getElementByName('tipo_mantenimiento').value;
+            let ordenTrabajoID
 
-            /*var orig = function(){
-                for(var i = 0; i< origen_data.length; i++){
-                    return RestController.findByName('origen_peticion', origen_data[i]).then(data =>{
-                        console.log(data.id);
-                        return data.id_origen + 1;
-                    })
-                }
-            }*/
+            let origen = () => {
+                RestController.findByName('origen', origenPeticion).then((data) => {
+                    origenPeticion = data.id
+                })
+            }
+
+            let getTipoMtto = () => {
+                RestController.findByName('tipoMantenimiento', tipoMtto).then((data) => {
+                    tipoMtto = data.id
+                })
+            }
+
+            let getEncargadoMtto = () => {
+                RestController.findByName('encargadoMantenimiento', encargadoMtto).then((data) => {
+                    encargadoMtto = data.id
+                })
+            }
+
+            let getPeticionID = () => {
+                RestController.findAll('peticion').then((data) => {
+                    peticionID = data[data.length].id + 1
+                })
+            }
+
+            let getOrdenTrabajoID = () => {
+                RestController.findAll('ordenTrabajo').then((data) => {
+                    ordenTrabajoID = data[data.length].id + 1
+                })
+            }
+
+            origen()
+            getTipoMtto()
+            getEncargadoMtto()
+            getPeticionID()
+            getOrdenTrabajoID()
 
             let peticion = {
-                id : "origin",
-                fecha: fecha_data,
-                observaciones: "observations"
-            };
+                id : peticionID,
+                idOrigen: origenPeticion,
+                fecha: fechaPeticion,
+                observaciones: observaciones
+            }
+
+            let detallePeticionJSON = {
+                idPeticion: peticionID,
+                idEquipo: equipo,
+                observaciones: observaciones
+            }
+
+            let ordenTrabajo = {
+                id: ordenTrabajoID,
+                idPeticion: peticionID,
+                idEquipo: equipo,
+                fechaEntrada: fechaPeticion,
+                fechaSalida: null,
+                idEncargadoMtto: encargadoMtto,
+                idTipoMtto: tipoMtto,
+                idEstado: 1
+            }
+
             console.log(peticion);
             RestController.create(peticion, 'peticion');
         }
