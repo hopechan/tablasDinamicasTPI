@@ -142,18 +142,21 @@ class TextBox extends HTMLElement{
 
             let origen = () => {
                 RestController.findByName('origen', origenPeticion).then((data) => {
+                    console.log(data)
                     origenPeticion = data.id
                 })
             }
 
             let getTipoMtto = () => {
                 RestController.findByName('tipoMantenimiento', tipoMtto).then((data) => {
+                    console.log(data)
                     tipoMtto = data.id
                 })
             }
 
             let getEncargadoMtto = () => {
                 RestController.findByName('personalMantenimiento', encargadoMtto).then((data) => {
+                    console.log(data)
                     encargadoMtto = data.id
                 })
             }
@@ -166,6 +169,7 @@ class TextBox extends HTMLElement{
 
             let getOrdenTrabajoID = () => {
                 RestController.findAll('ordenTrabajo').then((data) => {
+                    console.log(data)
                     ordenTrabajoID = data[data.length].id + 1
                 })
             }
