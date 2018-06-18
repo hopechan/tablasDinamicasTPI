@@ -1,0 +1,26 @@
+.formulario{
+    position: absolute;
+    border: 1px solid #015249;
+    padding: 5px;
+    box-shadow: 0 0 25px 0 #57BC90;
+}
+#datos_solicitante{
+    top: 75px;
+    left: 130px;
+}
+
+#datos_equipo{
+    top: 320px;
+    left: 130px;
+}
+
+#boton{
+    top: 500px;
+    left: 130px;
+}   
+
+label{
+    font-family:'Gill Sans', sans-serif;
+    padding: 0px 10px;
+    left: 100px;
+}

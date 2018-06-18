@@ -7,7 +7,7 @@ class Barra extends HTMLElement{
     }
 
     connectedCallback(){
-        const sd = this.attachShadow({mode: 'closed'}); 
+        const sd = this.attachShadow({mode: 'closed'});
         const contenedor = document.createElement('div');
         contenedor.id = 'id_barra';
         const lista_horizontal = document.createElement('ul');
@@ -27,7 +27,7 @@ class Barra extends HTMLElement{
                 color: #000;
                 padding: 32px 16px;
                 text-decoration: none;
-            }            
+            }
             </style>`;
             sd.innerHTML = hover;
         let estiloVertical = function(){
@@ -45,23 +45,23 @@ class Barra extends HTMLElement{
             estiloVertical();
             var opciones = opcionesBarra();
             for (let index = 0; index < opciones.length; index++) {
-                console.log(opciones[index]);
+                //console.log(opciones[index]);
                 lista_vertical.appendChild(opciones[index]);
             }
             contenedor.appendChild(lista_vertical);
         }
-        
+
         let opcionesBarra = function(){
             var opcionPrincipal = document.createElement('li');
             var opcionSolicitud = document.createElement('li');
             var opcionHistorial = document.createElement('li');
-            
-            //Enlances 
+
+            //Enlances
             var enlacePrincipal = document.createElement('a');
             enlacePrincipal.href = 'index.html';
             enlacePrincipal.innerText = 'Principal';
             opcionPrincipal.appendChild(enlacePrincipal);
-            
+
             var enlaceSolicitud = document.createElement('a');
             enlaceSolicitud.href = 'solicitud.html';
             enlaceSolicitud.innerText = 'Solicitud';
@@ -71,7 +71,7 @@ class Barra extends HTMLElement{
             enlaceHistorial.href = 'historial.html';
             enlaceHistorial.innerText = 'Historial';
             opcionHistorial.appendChild(enlaceHistorial);
-            
+
             let opciones = [];
             opciones.push(opcionPrincipal);
             opciones.push(opcionSolicitud);
